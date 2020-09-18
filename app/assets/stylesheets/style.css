@@ -1,0 +1,36 @@
+
+header {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Architects Daughter', cursive;
+}
+
+h2 {
+  font-size: 3vh;
+  color: mediumvioletred;
+  margin: 0;
+}
+
+.account {
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+  border-radius: 20px;
+  padding: 3px;
+  background-color: #bfc1e84a;
+}
+
+a:hover {
+  background-color: red;
+  background-color: #b383f3;
+  color: #a3f6ff;
+  transition: all .3s ease;
+}
+
+.form-item {
+  display: flex;
+  width: 20vw;
+  flex-direction: column;
+}

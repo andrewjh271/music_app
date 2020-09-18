@@ -6,10 +6,25 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <div><%= link_to 'Home', users_path %></div>
+      <h2>Music App</h2>
+      <div>
+        <% if current_user %>
+          <div class='account'><%= link_to 'Account', users_path %></div>
+          <div class='account'><%= link_to 'Logout', session_path, method: :delete %></div>
+        <% else %>
+          <div class='account'><%= link_to 'Login', new_session_path %></div>
+          <div class='account'><%= link_to 'Create Account', new_user_path %></div>
+        <% end %>
+      </div>
+    </header>
+
     <%= yield %>
   </body>
 </html>
