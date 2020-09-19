@@ -1,3 +1,12 @@
 <h3><%= @band.name %></h3>
 
-<%= link_to 'Delete Band', band_url(@band), method: :delete %>
+<h4>Albums:</h4>
+<ul>
+  <% Album.where(band: @band).each do |album| %>
+    <li><%= link_to album.title, album_path(album) %></li>
+    <br>
+  <% end %>
+</ul>
+
+<%= button_to 'Add Album', new_band_album_path(@band), method: :get %>
+<%= button_to 'Delete Band', band_url(@band), method: :delete, style: 'background-color: red;'%>
