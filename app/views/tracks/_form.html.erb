@@ -1,0 +1,61 @@
+<% action = edit ? track_path(track) : tracks_path %>
+<% submit = edit ? 'Update Track' : 'Create Track' %>
+
+<form action='<%= action %>' method='POST'>
+  <%= auth_token %>
+  <%= patch if edit %>
+
+  <div class='form-item'>
+    <label for='title'>Title: </label>
+    <input
+      type='text'
+      name='track[title]'
+      value='<%= track.title %>'>
+    <br>
+  </div>
+
+  <div class='form-item'>
+    <label for='ord'>Track Number: </label>
+    <input
+      id='ord'
+      type='number'
+      min='1'
+      max='99'
+      name='track[ord]'
+      value='<%= track.ord %>'>
+    <br>
+  </div>
+
+  <div class='form-item'>
+    <label for='album'>Album: </label>
+    <select
+      id='album'
+      type='select'
+      name='track[album_id]'>
+      <option disabled>--Select--</option>
+      <% Album.all.each do |album| %>
+        <option value='<%= album.id %>'
+                <%= 'selected' if track.album_id == album.id %>
+                ><%= album.title %></option>
+      <% end %>
+    </select>
+    <br>
+  </div>
+
+  <div class='form-item'>
+    <label for='lyrics'>Lyrics</label>
+    <textarea name='track[lyrics]'><%= @track.lyrics %></textarea>
+    <br>
+  </div>
+
+  <input type='radio' id='regular' name='track[bonus]' value='false' <%= 'checked' if track.bonus == false %>>
+  <label for='regular'>Regular</label><br>
+  <input type='radio' id='bonus' name='track[bonus]' value='true' <%= 'checked' if track.bonus %>>
+  <label for='bonus'>Bonus</label><br>
+  <br>
+
+  <input
+    type='submit'
+    value='<%= submit %>'>
+
+</form>

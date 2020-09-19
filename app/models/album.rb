@@ -15,6 +15,7 @@ class Album < ApplicationRecord
   validates :live, inclusion: { in: [true, false] }
 
   belongs_to :band
+  has_many :tracks, dependent: :destroy
   
   def band_name
     band.name

@@ -13,4 +13,21 @@ module ApplicationHelper
       name='_method'
       value='PATCH'>".html_safe
   end
+
+  def lyrics_display(lyrics)
+    stanzas = lyrics.split(/\n/)
+    html = '<i>'
+
+    stanzas.each do |stanza|
+      if stanza.match?(/^\r/)
+        html << "<br>"
+      else
+        html << "<div> #{h(stanza)} </div>"
+      end
+    end
+    html << '</i>'
+    html.html_safe
+
+    
+  end
 end
