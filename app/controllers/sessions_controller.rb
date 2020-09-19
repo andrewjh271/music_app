@@ -21,6 +21,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    render json: 'Logout successful'
+    redirect_to root_url
   end
 end

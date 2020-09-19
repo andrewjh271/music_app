@@ -1,4 +1,6 @@
 class AlbumsController < ApplicationController
+  before_action :require_user
+
   def index
     if params[:id]
       @albums = Album.where(band_id: params[:band_id])

@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+  before_action :require_user
+
   def index
     @tracks = Track.where(album_id: params[:album_id])
     render :index

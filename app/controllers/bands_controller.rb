@@ -1,5 +1,6 @@
 class BandsController < ApplicationController
   before_action :require_user, except: [:show, :index]
+  
   def index
     @bands = Band.all
     render :index

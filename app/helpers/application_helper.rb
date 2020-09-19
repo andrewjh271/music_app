@@ -27,7 +27,5 @@ module ApplicationHelper
     end
     html << '</i>'
     html.html_safe
-
-    
   end
 end
