@@ -1,0 +1,21 @@
+<% action = edit ? band_path(band) : bands_path %>
+<% submit = edit ? 'Update Band' : 'Create Band' %>
+
+<form action='<%= action %>' method='POST'>
+  <%= auth_token %>
+  <%= patch if edit %>
+
+  <div class='form-item'>
+    <label for='name'>Name: </label>
+    <input
+      type='text'
+      name='band[name]'
+      value='<%= band.name %>'>
+    <br>
+  </div>
+
+    <input
+      type='submit'
+      value='<%= submit %>'>
+
+</form>
