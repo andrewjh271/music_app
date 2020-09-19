@@ -11,8 +11,12 @@
 #  updated_at :datetime         not null
 #
 class Album < ApplicationRecord
-  validates :title, :year, :band_id, presence: true
+  validates :title, :year, presence: true
   validates :live, inclusion: { in: [true, false] }
 
   belongs_to :band
+  
+  def band_name
+    band.name
+  end
 end

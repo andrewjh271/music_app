@@ -1,0 +1,7 @@
+<% if params[:band_id] %>
+  <h3>All of <%= Band.find_by(id: params[:band_id]).name %>'s albums:</h3>
+<% else %>
+  <h3>All albums in Database:</h3>
+<% end %>
+<br>
+<%= render @albums %>

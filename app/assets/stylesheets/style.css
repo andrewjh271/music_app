@@ -34,3 +34,7 @@ a:hover {
   width: 20vw;
   flex-direction: column;
 }
+
+.button_to {
+  display: inline-block
+}
