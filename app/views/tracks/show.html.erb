@@ -12,8 +12,17 @@
     <p>Lyrics:</p>
     <%= lyrics_display(@track.lyrics) %>
   </section>
-  <br><br>
+  <br>
 <% end %>
+
+<section>
+<p>Notes:</p>
+<% @track.notes.each do |note| %>
+  <li><%= render note %></li>
+<% end %>
+<br>
+
+<%= render 'notes/form', track_id: @track.id %>
 
 <%= button_to 'Back to Album', album_path(@track.album_id), method: :get %>
 <%= button_to 'Update Track', edit_track_path(@track), method: :get %>

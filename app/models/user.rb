@@ -19,6 +19,8 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  has_many :notes
+
   def self.find_by_credentials(email, password)
     user = self.find_by(email: email)
     user.try(:is_password?, password) ? user : nil

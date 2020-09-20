@@ -1,0 +1,13 @@
+<div class='form-item'>
+  <form action='<%= notes_path %>', method='POST'>
+    <%= auth_token %>
+    <input type='hidden' name='note[track_id]', value='<%= track_id %>'>
+
+    <label for='content'>Add a note: </label>
+    <textarea id='content' name='note[content]'></textarea>
+    <br>
+
+    <input type='submit' value='Post'>
+  </form>
+</div>
+<br>

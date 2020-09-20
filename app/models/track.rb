@@ -18,6 +18,7 @@ class Track < ApplicationRecord
 
   belongs_to :album
   has_one :band, through: :album
+  has_many :notes, dependent: :destroy
 
   def album_title
     album.title
