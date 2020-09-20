@@ -28,4 +28,8 @@ module ApplicationHelper
     html << '</i>'
     html.html_safe
   end
+
+  def ugly_lyrics(lyrics)
+    "<pre><i>&#9835; #{h(lyrics)}</i></pre>".gsub(/\R/, "\r\n&#9835; ").html_safe
+  end
 end

@@ -10,7 +10,8 @@
 <% if @track.lyrics %>
   <section>
     <p>Lyrics:</p>
-    <%= lyrics_display(@track.lyrics) %>
+    <%#= lyrics_display(@track.lyrics) %>
+    <%= ugly_lyrics(@track.lyrics) %>
   </section>
   <br>
 <% end %>
