@@ -8,12 +8,25 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.activation_token = generate_activation_token
     if @user.save
-      login(@user)
-      redirect_to users_url
+      msg = UserMailer.confirmation_email(@user)
+      msg.deliver_now
+      render plain: 'Please check your email to activate your account.'
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
+    end
+  end
+
+  def activate
+    user = User.find_by(activation_token: params[:activation_token])
+    if user
+      user.update(activated: true)
+      login(user)
+      render :activated
+    else
+      render plain: 'Activation was unsuccessful'
     end
   end
 
@@ -26,5 +39,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password)
+  end
+
+  def generate_activation_token
+    SecureRandom.urlsafe_base64
   end
 end

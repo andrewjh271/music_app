@@ -10,8 +10,13 @@ class SessionsController < ApplicationController
       params[:user][:password])
 
     if user
-      login(user)
-      redirect_to users_url
+      if login(user)
+        redirect_to users_url 
+      else
+        flash[:errors] ||= []
+        flash[:errors] << 'This account has not been activated'
+        redirect_to new_session_url
+      end
     else
       flash[:errors] ||= []
       flash[:errors] << 'Invalid credentials'

@@ -2,8 +2,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def login(user)
-    user.reset_session_token!
-    session[:session_token] = user.session_token
+    if user.activated
+      user.reset_session_token!
+      session[:session_token] = user.session_token
+    end
   end
 
   def logout
