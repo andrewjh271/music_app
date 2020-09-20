@@ -2,3 +2,5 @@
 
 <%= render 'shared/errors' %>
 <%= render 'form', track: @track, edit: true %>
+<br>
+<%= button_to 'Back to Album', album_path(@track.album_id), method: :get %>

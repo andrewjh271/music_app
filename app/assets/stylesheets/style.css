@@ -38,3 +38,7 @@ a:hover {
 .button_to {
   display: inline-block
 }
+
+.errors {
+  color: red
+}

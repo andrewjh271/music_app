@@ -12,7 +12,8 @@
 #  album_id   :integer          not null
 #
 class Track < ApplicationRecord
-  validates :title, :ord, presence: true
+  validates :title, presence: true
+  validate :track_number
   validates :ord, uniqueness: { scope: :album_id }
   validates :bonus, inclusion: { in: [true, false] }
 
@@ -26,5 +27,12 @@ class Track < ApplicationRecord
 
   def band_name
     album.band_name
+  end
+
+  private
+
+  def track_number
+    # custom validation in order to create error message w/o attribute name
+    errors[:base] << 'Track number can\'t be blank' unless ord
   end
 end
