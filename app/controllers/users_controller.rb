@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.activation_token = generate_activation_token
     if @user.save
       msg = UserMailer.confirmation_email(@user)
       msg.deliver_now
@@ -39,9 +38,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password)
-  end
-
-  def generate_activation_token
-    SecureRandom.urlsafe_base64
   end
 end

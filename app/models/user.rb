@@ -2,12 +2,14 @@
 #
 # Table name: users
 #
-#  id              :bigint           not null, primary key
-#  email           :string           not null
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id               :bigint           not null, primary key
+#  email            :string           not null
+#  password_digest  :string           not null
+#  session_token    :string           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  activated        :boolean          default(FALSE), not null
+#  activation_token :string           not null
 #
 class User < ApplicationRecord
   attr_reader :password
@@ -17,7 +19,7 @@ class User < ApplicationRecord
   validates :password_digest, presence: { message: 'Password can\'t be blank' }
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  after_initialize :ensure_session_token
+  after_initialize :ensure_tokens
 
   has_many :notes
 
@@ -36,17 +38,18 @@ class User < ApplicationRecord
   end
 
   def reset_session_token!
-    update(session_token: generate_session_token)
+    update(session_token: generate_token)
     session_token
   end
 
   private
 
-  def ensure_session_token
-    self.session_token ||= generate_session_token
+  def ensure_tokens
+    self.session_token ||= generate_token
+    self.activation_token ||= generate_token
   end
 
-  def generate_session_token
+  def generate_token
     SecureRandom.urlsafe_base64
   end
 end
