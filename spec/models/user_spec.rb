@@ -20,8 +20,14 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email) }
     it { should validate_presence_of(:session_token) }
-    it { should validate_presence_of(:password_digest).with_message('Password can\'t be blank') }
     it { should validate_length_of(:password).is_at_least(6) }
+    # it { should validate_presence_of(:password_digest).with_message('Password can\'t be blank') }
+    it 'should validate presence of password_digest (w/ custom method)' do
+      # shoulda matcher doesn't seem to work with custom validation
+      user.password_digest = nil
+      expect(user.valid?).to be(false)
+      expect(user.errors.full_messages).to eq(['Password can\'t be blank'])
+    end
 
     context 'before validations' do
       it 'should set @password_digest' do
