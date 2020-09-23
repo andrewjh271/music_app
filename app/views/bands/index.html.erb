@@ -1,5 +1,9 @@
 <h3>Bands:</h3>
 
+<% if flash[:notice] %>
+    <p style='color: red;'><%= flash[:notice] %>
+<% end %>
+
 <ul>
   <%= render @bands %>
 </ul>

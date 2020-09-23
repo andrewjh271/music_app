@@ -38,7 +38,8 @@ RSpec.describe UsersController, type: :controller do
         email = ActionMailer::Base.deliveries.last
         expect(email.subject).to eq('Please confirm your account')
         expect(email.to).to eq(['jen@hotmail.com'])
-        expect(response.body).to eq('Please check your email to activate your account.')
+        expect(response).to redirect_to(bands_url)
+        expect(flash[:notice]).to eq('Please check your email to activate your account.')
       end
     end
   end

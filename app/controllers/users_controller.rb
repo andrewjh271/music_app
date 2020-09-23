@@ -11,7 +11,8 @@ class UsersController < ApplicationController
     if @user.save
       msg = UserMailer.confirmation_email(@user)
       msg.deliver_now
-      render plain: 'Please check your email to activate your account.'
+      flash[:notice] = 'Please check your email to activate your account.'
+      redirect_to bands_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
