@@ -13,7 +13,7 @@ RSpec.describe UsersController, type: :controller do
       it 'validates the presence of the user\'s password' do
         post :create, params: { user: { email: 'jen@hotmail.com' } }
         expect(response).to render_template(:new)
-        expect(flash[:errors]).to eq(['Password digest Password can\'t be blank'])
+        expect(flash[:errors]).to eq(['Password can\'t be blank'])
       end
 
       it 'validates the presence of the user\'s email' do

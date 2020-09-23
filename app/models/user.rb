@@ -16,8 +16,9 @@ class User < ApplicationRecord
 
   validates :email, :session_token, presence: true
   validates :email, uniqueness: true
-  validates :password_digest, presence: { message: 'Password can\'t be blank' }
+  # validates :password_digest, presence: { message: 'Password can\'t be blank' }
   validates :password, length: { minimum: 6, allow_nil: true }
+  validate :require_password_digest
 
   after_initialize :ensure_tokens
 
@@ -30,6 +31,10 @@ class User < ApplicationRecord
 
   def password=(password)
     @password = password
+
+    return if password.empty?
+    # don't want to set password digest for blank password (mainly for error messages and tests,
+    # since password = '' would fail password length requirement anyway)
     self.password_digest = BCrypt::Password.create(password)
   end
 
@@ -51,5 +56,10 @@ class User < ApplicationRecord
 
   def generate_token
     SecureRandom.urlsafe_base64
+  end
+
+  def require_password_digest
+    # custom method here because I don't want errors message to be 'Password_digest Password can't be blank
+    errors[:base] << 'Password can\'t be blank' unless password_digest
   end
 end
