@@ -11,17 +11,9 @@
 #  activated        :boolean          default(FALSE), not null
 #  activation_token :string           not null
 #
-
-one:
-  email: MyString
-  password_digest: MyString
-  string: MyString
-  session_token: MyString
-  string: MyString
-
-two:
-  email: MyString
-  password_digest: MyString
-  string: MyString
-  session_token: MyString
-  string: MyString
+FactoryBot.define do
+  factory :user do
+    email { Faker::Internet.free_email }
+    password { Faker::Internet.password(min_length: 6) }
+  end
+end
