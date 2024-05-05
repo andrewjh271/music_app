@@ -1,5 +1,5 @@
 <%= note.content %>
 —<%= note.author_email %>
-<% if note.user_id == current_user.id %>
+<% if note.author == current_user %>
   <%= button_to 'Delete', note_path(note), method: :delete %>
 <% end %>

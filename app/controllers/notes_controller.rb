@@ -4,7 +4,7 @@ class NotesController < ApplicationController
 
   def create
     note = Note.new(params.require(:note).permit(:content, :track_id))
-    note.user_id = current_user.id
+    note.author = current_user
     note.save
     redirect_to track_url(note.track_id)
   end
@@ -18,7 +18,7 @@ class NotesController < ApplicationController
 
   def ensure_authorized_user
     @note = Note.find_by(id: params[:id])
-    unless @note.user_id == current_user.id
+    unless @note.author == current_user
       render plain: 'Unauthorized user!', status: :forbidden
     end
   end
