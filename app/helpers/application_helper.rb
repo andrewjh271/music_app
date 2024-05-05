@@ -30,6 +30,6 @@ module ApplicationHelper
   end
 
   def ugly_lyrics(lyrics)
-    "<pre><i>&#9835; #{h(lyrics)}</i></pre>".gsub(/\R/, "\r\n&#9835; ").html_safe
+    "<pre><i>&#9835;  #{h(lyrics)}</i></pre>".gsub(/\R/, "\r\n&#9835;  ").html_safe
   end
 end
