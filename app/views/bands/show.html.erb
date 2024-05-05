@@ -2,7 +2,7 @@
 
 <h4>Albums:</h4>
 <ul>
-  <% Album.where(band: @band).each do |album| %>
+  <% @band.albums.order(:year).each do |album| %>
     <li><%= link_to album.title, album_path(album) %></li>
     <br>
   <% end %>
