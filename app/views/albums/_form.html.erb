@@ -42,7 +42,7 @@
     <br>
   </div>
 
-  <input type='radio' id='studio' name='album[live]' value='false' <%= 'checked' if album.live == false %>>
+  <input type='radio' id='studio' name='album[live]' value='false' <%= 'checked' if !album.live %>>
   <label for='studio'>Studio</label><br>
   <input type='radio' id='live' name='album[live]' value='true' <%= 'checked' if album.live %>>
   <label for='live'>Live</label><br>
