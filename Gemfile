@@ -56,6 +56,9 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'annotate'
+
+  gem 'spring-commands-rspec'
+  gem 'guard-rspec'
 end
 
 group :test do
@@ -65,7 +68,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   # gem 'chromedriver-helper'
   gem 'faker'
-  gem 'guard-rspec'
+  # gem 'guard-rspec'
   gem 'launchy'
   gem 'shoulda-matchers'
 end
